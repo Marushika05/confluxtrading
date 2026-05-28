@@ -2,6 +2,12 @@ import { NextResponse } from "next/server";
 
 import { supabase } from "@/lib/supabase";
 
+import { Resend } from "resend";
+
+const resend = new Resend(
+  process.env.RESEND_API_KEY
+);
+
 export async function POST(req: Request) {
 
   const body = await req.json();
@@ -39,6 +45,34 @@ export async function POST(req: Request) {
       success: false,
       error,
     });
+
+  }
+
+  try {
+
+    await resend.emails.send({
+      from: "onboarding@resend.dev",
+
+      to: "marushikagupta@gmail.com",
+
+      subject: "New Conflux Trading Inquiry",
+
+      html: `
+        <h2>New Lead Received</h2>
+
+        <p><strong>Name:</strong> ${name}</p>
+
+        <p><strong>Phone:</strong> ${phone}</p>
+
+        <p><strong>Email:</strong> ${email}</p>
+
+        <p><strong>Message:</strong> ${message}</p>
+      `,
+    });
+
+  } catch (emailError) {
+
+    console.log(emailError);
 
   }
 
