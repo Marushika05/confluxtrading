@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-
+import PhoneInput from "react-phone-input-2";
 export default function Contact() {
 
   const [form, setForm] = useState({
@@ -16,6 +16,34 @@ export default function Contact() {
   async function handleSubmit(e: any) {
 
     e.preventDefault();
+
+    if (
+      !form.name ||
+      !form.phone ||
+      !form.email ||
+      !form.message
+    ) {
+      alert("Please fill all fields");
+      return;
+    }
+
+    const emailRegex =
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(form.email)) {
+      alert("Enter valid email");
+      return;
+    }
+
+    if (form.phone.length < 8) {
+      alert("Enter valid phone number");
+      return;
+    }
+
+    if (form.message.length < 10) {
+      alert("Message too short");
+      return;
+    }
 
     setLoading(true);
 
@@ -36,6 +64,13 @@ export default function Contact() {
     setLoading(false);
 
     alert("Inquiry submitted!");
+
+    setForm({
+      name: "",
+      phone: "",
+      email: "",
+      message: "",
+    });
   }
 
   return (
@@ -51,9 +86,12 @@ export default function Contact() {
       >
 
         <input
+          type="text"
           placeholder="Name"
           className="w-full border p-4"
           value={form.name}
+          required
+          minLength={2}
           onChange={(e) =>
             setForm({
               ...form,
@@ -62,22 +100,27 @@ export default function Contact() {
           }
         />
 
-        <input
-          placeholder="Phone"
-          className="w-full border p-4"
-          value={form.phone}
-          onChange={(e) =>
-            setForm({
-              ...form,
-              phone: e.target.value,
-            })
-          }
-        />
+        <PhoneInput
+  country={"ca"}
+  value={form.phone}
+  onChange={(phone) =>
+    setForm({
+      ...form,
+      phone,
+    })
+  }
+  inputStyle={{
+    width: "100%",
+    height: "56px",
+  }}
+/>
 
         <input
+          type="email"
           placeholder="Email"
           className="w-full border p-4"
           value={form.email}
+          required
           onChange={(e) =>
             setForm({
               ...form,
@@ -90,6 +133,8 @@ export default function Contact() {
           placeholder="Message"
           className="w-full border p-4 h-40"
           value={form.message}
+          required
+          minLength={10}
           onChange={(e) =>
             setForm({
               ...form,
@@ -99,12 +144,15 @@ export default function Contact() {
         />
 
         <button
+          type="submit"
+          disabled={loading}
           className="
           bg-orange-600
           text-white
           px-6
           py-3
           rounded
+          disabled:opacity-50
           "
         >
           {loading ? "Submitting..." : "Submit"}
