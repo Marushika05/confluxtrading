@@ -10,6 +10,12 @@ import { Turnstile } from "@marsidev/react-turnstile";
 
 export default function Contact() {
 
+  console.log(
+    "TURNSTILE KEY:",
+    process.env
+      .NEXT_PUBLIC_TURNSTILE_SITE_KEY
+  );
+
   const [form, setForm] = useState({
     name: "",
     phone: "",
@@ -167,6 +173,7 @@ export default function Contact() {
               size: "normal",
             }}
             onSuccess={(token) => {
+
               console.log(
                 "Turnstile success:",
                 token
