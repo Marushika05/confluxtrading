@@ -1,7 +1,13 @@
 "use client";
 
 import { useState } from "react";
+
 import PhoneInput from "react-phone-input-2";
+
+import "react-phone-input-2/lib/style.css";
+
+import { Turnstile } from "@marsidev/react-turnstile";
+
 export default function Contact() {
 
   const [form, setForm] = useState({
@@ -12,6 +18,8 @@ export default function Contact() {
   });
 
   const [loading, setLoading] = useState(false);
+
+  const [token, setToken] = useState("");
 
   async function handleSubmit(e: any) {
 
@@ -35,8 +43,8 @@ export default function Contact() {
       return;
     }
 
-    if (form.phone.length < 8) {
-      alert("Enter valid phone number");
+    if (!token) {
+      alert("Please verify that you are human");
       return;
     }
 
@@ -54,7 +62,10 @@ export default function Contact() {
         "Content-Type": "application/json",
       },
 
-      body: JSON.stringify(form),
+      body: JSON.stringify({
+        ...form,
+        token,
+      }),
     });
 
     const data = await response.json();
@@ -71,6 +82,8 @@ export default function Contact() {
       email: "",
       message: "",
     });
+
+    setToken("");
   }
 
   return (
@@ -101,19 +114,19 @@ export default function Contact() {
         />
 
         <PhoneInput
-  country={"ca"}
-  value={form.phone}
-  onChange={(phone) =>
-    setForm({
-      ...form,
-      phone,
-    })
-  }
-  inputStyle={{
-    width: "100%",
-    height: "56px",
-  }}
-/>
+          country={"ca"}
+          value={form.phone}
+          onChange={(phone) =>
+            setForm({
+              ...form,
+              phone,
+            })
+          }
+          inputStyle={{
+            width: "100%",
+            height: "56px",
+          }}
+        />
 
         <input
           type="email"
@@ -141,6 +154,16 @@ export default function Contact() {
               message: e.target.value,
             })
           }
+        />
+
+        <Turnstile
+          siteKey={
+            process.env
+              .NEXT_PUBLIC_TURNSTILE_SITE_KEY!
+          }
+          onSuccess={(token) => {
+            setToken(token);
+          }}
         />
 
         <button
