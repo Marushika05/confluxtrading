@@ -101,7 +101,7 @@ export default function Contact() {
         <input
           type="text"
           placeholder="Name"
-          className="w-full border p-4"
+          className="w-full border p-4 rounded"
           value={form.name}
           required
           minLength={2}
@@ -131,7 +131,7 @@ export default function Contact() {
         <input
           type="email"
           placeholder="Email"
-          className="w-full border p-4"
+          className="w-full border p-4 rounded"
           value={form.email}
           required
           onChange={(e) =>
@@ -144,7 +144,7 @@ export default function Contact() {
 
         <textarea
           placeholder="Message"
-          className="w-full border p-4 h-40"
+          className="w-full border p-4 h-40 rounded"
           value={form.message}
           required
           minLength={10}
@@ -156,15 +156,26 @@ export default function Contact() {
           }
         />
 
-        <Turnstile
-          siteKey={
-            process.env
-              .NEXT_PUBLIC_TURNSTILE_SITE_KEY!
-          }
-          onSuccess={(token) => {
-            setToken(token);
-          }}
-        />
+        <div className="flex justify-center">
+          <Turnstile
+            siteKey={
+              process.env
+                .NEXT_PUBLIC_TURNSTILE_SITE_KEY!
+            }
+            options={{
+              theme: "light",
+              size: "normal",
+            }}
+            onSuccess={(token) => {
+              console.log(
+                "Turnstile success:",
+                token
+              );
+
+              setToken(token);
+            }}
+          />
+        </div>
 
         <button
           type="submit"
@@ -186,4 +197,3 @@ export default function Contact() {
     </main>
   );
 }
-
