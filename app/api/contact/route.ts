@@ -12,19 +12,62 @@ export async function POST(req: Request) {
 
   const body = await req.json();
 
-  const { name, phone, email, message } = body;
+  const {
+    name,
+    phone,
+    email,
+    message,
+    token,
+  } = body;
 
   if (
     !name ||
     !phone ||
     !email ||
-    !message
+    !message ||
+    !token
   ) {
     return NextResponse.json({
       success: false,
       error: "Missing fields",
     });
   }
+
+  // VERIFY TURNSTILE TOKEN
+
+  const formData = new FormData();
+
+  formData.append(
+    "secret",
+    process.env.TURNSTILE_SECRET_KEY!
+  );
+
+  formData.append(
+    "response",
+    token
+  );
+
+  const turnstileRes = await fetch(
+    "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+    {
+      method: "POST",
+      body: formData,
+    }
+  );
+
+  const turnstileData =
+    await turnstileRes.json();
+
+  if (!turnstileData.success) {
+
+    return NextResponse.json({
+      success: false,
+      error: "Human verification failed",
+    });
+
+  }
+
+  // SAVE LEAD
 
   const { data, error } = await supabase
     .from("leads")
@@ -39,7 +82,10 @@ export async function POST(req: Request) {
 
   if (error) {
 
-    console.log("SUPABASE ERROR:", error);
+    console.log(
+      "SUPABASE ERROR:",
+      error
+    );
 
     return NextResponse.json({
       success: false,
@@ -48,14 +94,18 @@ export async function POST(req: Request) {
 
   }
 
+  // SEND EMAIL
+
   try {
 
     await resend.emails.send({
+
       from: "onboarding@resend.dev",
 
       to: "marushikagupta@gmail.com",
 
-      subject: "New Conflux Trading Inquiry",
+      subject:
+        "New Conflux Trading Inquiry",
 
       html: `
         <h2>New Lead Received</h2>
