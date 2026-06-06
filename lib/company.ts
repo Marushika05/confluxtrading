@@ -1,4 +1,4 @@
 export const COMPANY = {
-  whatsapp: "916284642053",
-  email: "",
+  whatsapp: "16478631592",
+  email: "tradingconflux@gmail.com",
 };// later add real contact info here

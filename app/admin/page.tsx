@@ -1,4 +1,5 @@
 import { supabase } from "@/lib/supabase";
+import AdminLogoutButton from "@/components/AdminLogoutButton";
 
 export default async function AdminPage() {
 
@@ -21,9 +22,15 @@ export default async function AdminPage() {
   return (
     <main className="p-10">
 
-      <h1 className="text-4xl font-bold mb-8">
-        Admin Dashboard
-      </h1>
+      <div className="flex justify-between items-center mb-8">
+
+  <h1 className="text-4xl font-bold">
+    Admin Dashboard
+  </h1>
+
+  <AdminLogoutButton />
+
+</div>
 
       <div className="overflow-x-auto">
 

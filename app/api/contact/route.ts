@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import { supabase } from "@/lib/supabase";
 
 import { Resend } from "resend";
+import { COMPANY } from "@/lib/company";
 
 const resend = new Resend(
   process.env.RESEND_API_KEY
@@ -102,7 +103,7 @@ export async function POST(req: Request) {
 
       from: "onboarding@resend.dev",
 
-      to: "marushikagupta@gmail.com",
+      to: COMPANY.email,
 
       subject:
         "New Conflux Trading Inquiry",
