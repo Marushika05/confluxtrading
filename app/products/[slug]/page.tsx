@@ -1,4 +1,5 @@
 import Image from "next/image";
+import ProductTracker from "@/components/ProductTracker";
 
 const productData: any = {
   "safety-railings": {
@@ -38,7 +39,10 @@ export default async function ProductDetails({
   }
 
   return (
+    <>
+    <ProductTracker slug={slug} />
     <main className="max-w-7xl mx-auto px-8 py-20">
+      
 
       <div className="grid md:grid-cols-2 gap-16">
 
@@ -96,5 +100,6 @@ export default async function ProductDetails({
       </div>
 
     </main>
+    </>
   );
 }

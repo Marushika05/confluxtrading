@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import ProductCategories from "@/components/ProductCategories";
 import WhyChooseUs from "@/components/WhyChooseUs";
+import RecentlyViewed from "@/components/RecentlyViewed";
 
 export default function Home() {
   return (
