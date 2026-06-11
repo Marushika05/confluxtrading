@@ -45,6 +45,10 @@ export default async function AdminPage() {
               </th>
 
               <th className="border p-4">
+               Company
+              </th>
+
+              <th className="border p-4">
                 Phone
               </th>
 
@@ -68,6 +72,10 @@ export default async function AdminPage() {
 
                 <td className="border p-4">
                   {lead.name}
+                </td>
+
+                <td className="border p-4">
+                 {lead.company}
                 </td>
 
                 <td className="border p-4">

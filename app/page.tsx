@@ -1,40 +1,90 @@
-import Navbar from "@/components/Navbar";
 import ProductCategories from "@/components/ProductCategories";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import RecentlyViewed from "@/components/RecentlyViewed";
+import MarketsServed from "@/components/MarketsServed";
+import AboutConflux from "@/components/AboutConflux";
 
 export default function Home() {
   return (
     <main>
 
-       
+      {/* HERO SECTION */}
 
-      <section className="bg-gray-900 text-white py-32">
+      <section className="bg-gray-950 text-white py-36">
 
         <div className="max-w-7xl mx-auto px-8">
 
-          <h1 className="text-6xl font-bold mb-6">
-            Industrial Fittings &
-            Manufacturing Solutions
-          </h1>
-
-          <p className="text-xl mb-8">
-            High-quality engineered industrial products.
+          <p className="uppercase tracking-[0.25em] text-orange-500 mb-6">
+            Conflux Trading
           </p>
 
-          <button className="bg-orange-600 px-8 py-4 rounded-lg">
-            Explore Products
-          </button>
+          <h1 className="text-6xl md:text-7xl font-bold leading-tight max-w-5xl mb-8">
+
+            Direct-to-Foundry Industrial Hardware
+            for North American Infrastructure
+
+          </h1>
+
+          <p className="text-xl text-gray-300 max-w-3xl mb-10 leading-relaxed">
+
+            Precision-machined NPT fittings,
+            structural components, and custom
+            metal hardware delivered with
+            dependable global logistics and
+            uncompromising manufacturing standards.
+
+          </p>
+
+          <div className="flex flex-wrap gap-4">
+
+            <button
+              className="
+              bg-orange-600
+              hover:bg-orange-700
+              px-8
+              py-4
+              rounded-lg
+              font-semibold
+              transition
+              "
+            >
+              View Capabilities
+            </button>
+
+            <button
+              className="
+              border
+              border-white
+              px-8
+              py-4
+              rounded-lg
+              font-semibold
+              hover:bg-white
+              hover:text-black
+              transition
+              "
+            >
+              Request Quote
+            </button>
+
+          </div>
 
         </div>
 
       </section>
 
+      {/* EXISTING SECTIONS */}
+
+
+      <AboutConflux />
+      <MarketsServed />
+
+
       <ProductCategories />
 
       <WhyChooseUs />
-      <RecentlyViewed />
 
+      <RecentlyViewed />
 
     </main>
   );

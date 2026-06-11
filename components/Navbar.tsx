@@ -10,40 +10,71 @@ export default function Navbar() {
 
           <Link
             href="/"
-            className="text-3xl font-bold"
+            className="
+            text-3xl
+            font-bold
+            tracking-tight
+            "
           >
             Conflux Trading
           </Link>
 
           <div className="flex gap-8 items-center">
 
-            <Link href="/">
-              Home
-            </Link>
-
-            <Link href="/products">
-              Products
-            </Link>
-
-            <Link href="/about">
+            <a
+              href="#about"
+              className="
+              text-gray-700
+              hover:text-black
+              "
+            >
               About
-            </Link>
+            </a>
 
-            <Link href="/faq">
-              FAQs
-            </Link>
+            <a
+              href="#markets"
+              className="
+              text-gray-700
+              hover:text-black
+              "
+            >
+              Markets
+            </a>
+
+            <a
+              href="#capabilities"
+              className="
+              text-gray-700
+              hover:text-black
+              "
+            >
+              Capabilities
+            </a>
+
+            <a
+              href="#contact"
+              className="
+              text-gray-700
+              hover:text-black
+              "
+            >
+              Contact
+            </a>
 
             <Link
               href="/contact"
               className="
               bg-orange-600
               text-white
-              px-5
+              px-6
               py-3
               rounded-lg
+              font-semibold
+              hover:bg-orange-700
+              transition
               "
             >
-              Contact
+              Request Quote
             </Link>
 
           </div>

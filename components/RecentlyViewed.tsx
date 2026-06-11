@@ -10,12 +10,11 @@ export default function RecentlyViewed() {
 
   useEffect(() => {
 
-    const stored =
-      JSON.parse(
-        localStorage.getItem(
-          "recentProducts"
-        ) || "[]"
-      );
+    const stored = JSON.parse(
+      localStorage.getItem(
+        "recentProducts"
+      ) || "[]"
+    );
 
     setProducts(stored);
 
@@ -25,33 +24,64 @@ export default function RecentlyViewed() {
     return null;
 
   return (
-    <div className="mt-12">
+    <section className="py-24 bg-white">
 
-      <h2 className="text-2xl font-bold mb-4">
-        Continue Where You Left Off
-      </h2>
+      <div className="max-w-7xl mx-auto px-8">
 
-      <div className="flex gap-4 flex-wrap">
+        <p className="text-orange-600 font-semibold mb-3">
+          PROCUREMENT WORKFLOW
+        </p>
 
-        {products.map((slug) => (
+        <h2 className="text-5xl font-bold mb-6">
+          Continue Your Review
+        </h2>
 
-          <Link
-            key={slug}
-            href={`/products/${slug}`}
-            className="
-              border
-              rounded
-              p-4
-              hover:shadow-lg
-            "
-          >
-            {slug}
-          </Link>
+        <p className="text-gray-600 text-lg max-w-3xl mb-12">
+          Resume reviewing previously viewed
+          product categories and manufacturing
+          capabilities without restarting your
+          procurement process.
+        </p>
 
-        ))}
+        <div className="grid md:grid-cols-3 gap-6">
+
+          {products.map((slug) => (
+
+            <Link
+              key={slug}
+              href={`/products/${slug}`}
+              className="
+                border
+                rounded-2xl
+                p-8
+                hover:shadow-lg
+                transition
+              "
+            >
+
+              <h3 className="font-bold text-xl mb-3">
+                {slug
+                  .replaceAll("-", " ")
+                  .replace(
+                    /\b\w/g,
+                    (char) => char.toUpperCase()
+                  )}
+              </h3>
+
+              <p className="text-gray-600">
+                View specifications,
+                requirements, and project
+                information.
+              </p>
+
+            </Link>
+
+          ))}
+
+        </div>
 
       </div>
 
-    </div>
+    </section>
   );
 }

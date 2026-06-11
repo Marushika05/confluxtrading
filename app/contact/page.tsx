@@ -1,34 +1,24 @@
+ 
 "use client";
 
 import { useState } from "react";
-
 import PhoneInput from "react-phone-input-2";
-
 import "react-phone-input-2/lib/style.css";
-
 import { Turnstile } from "@marsidev/react-turnstile";
 
 export default function Contact() {
-
-  console.log(
-    "TURNSTILE KEY:",
-    process.env
-      .NEXT_PUBLIC_TURNSTILE_SITE_KEY
-  );
-
   const [form, setForm] = useState({
     name: "",
+    company: "",
     phone: "",
     email: "",
     message: "",
   });
 
   const [loading, setLoading] = useState(false);
-
   const [token, setToken] = useState("");
 
-  async function handleSubmit(e: any) {
-
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     if (
@@ -37,7 +27,7 @@ export default function Contact() {
       !form.email ||
       !form.message
     ) {
-      alert("Please fill all fields");
+      alert("Please fill all required fields");
       return;
     }
 
@@ -45,7 +35,7 @@ export default function Contact() {
       /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (!emailRegex.test(form.email)) {
-      alert("Enter valid email");
+      alert("Enter a valid email");
       return;
     }
 
@@ -55,58 +45,73 @@ export default function Contact() {
     }
 
     if (form.message.length < 10) {
-      alert("Message too short");
+      alert("Project requirements are too short");
       return;
     }
 
     setLoading(true);
 
-    const response = await fetch("/api/contact", {
-      method: "POST",
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...form,
+          token,
+        }),
+      });
 
-      headers: {
-        "Content-Type": "application/json",
-      },
+      const data = await response.json();
 
-      body: JSON.stringify({
-        ...form,
-        token,
-      }),
-    });
+      console.log(data);
 
-    const data = await response.json();
+      alert("RFQ submitted successfully!");
 
-    console.log(data);
+      setForm({
+        name: "",
+        company: "",
+        phone: "",
+        email: "",
+        message: "",
+      });
+
+      setToken("");
+    } catch (error) {
+      console.error(error);
+      alert("Something went wrong");
+    }
 
     setLoading(false);
-
-    alert("Inquiry submitted!");
-
-    setForm({
-      name: "",
-      phone: "",
-      email: "",
-      message: "",
-    });
-
-    setToken("");
   }
 
   return (
-    <main className="max-w-3xl mx-auto p-10">
+    <main className="max-w-4xl mx-auto p-10">
+      <div className="mb-12">
+        <p className="text-orange-600 font-semibold mb-3">
+          REQUEST FOR QUOTE
+        </p>
 
-      <h1 className="text-5xl font-bold mb-8">
-        Contact Us
-      </h1>
+        <h1 className="text-5xl font-bold mb-6">
+          Start Your Procurement Discussion
+        </h1>
+
+        <p className="text-gray-600 text-lg">
+          Submit your project requirements,
+          bill of materials, or sourcing needs.
+          Our team will review your inquiry and
+          respond with the most appropriate solution.
+        </p>
+      </div>
 
       <form
         onSubmit={handleSubmit}
-        className="space-y-4"
+        className="space-y-5"
       >
-
         <input
           type="text"
-          placeholder="Name"
+          placeholder="Full Name"
           className="w-full border p-4 rounded"
           value={form.name}
           required
@@ -115,6 +120,19 @@ export default function Contact() {
             setForm({
               ...form,
               name: e.target.value,
+            })
+          }
+        />
+
+        <input
+          type="text"
+          placeholder="Company"
+          className="w-full border p-4 rounded"
+          value={form.company}
+          onChange={(e) =>
+            setForm({
+              ...form,
+              company: e.target.value,
             })
           }
         />
@@ -136,7 +154,7 @@ export default function Contact() {
 
         <input
           type="email"
-          placeholder="Email"
+          placeholder="Business Email"
           className="w-full border p-4 rounded"
           value={form.email}
           required
@@ -149,8 +167,8 @@ export default function Contact() {
         />
 
         <textarea
-          placeholder="Message"
-          className="w-full border p-4 h-40 rounded"
+          placeholder="Project Requirements / Bill of Materials"
+          className="w-full border p-4 h-48 rounded"
           value={form.message}
           required
           minLength={10}
@@ -173,12 +191,10 @@ export default function Contact() {
               size: "normal",
             }}
             onSuccess={(token) => {
-
               console.log(
                 "Turnstile success:",
                 token
               );
-
               setToken(token);
             }}
           />
@@ -188,19 +204,20 @@ export default function Contact() {
           type="submit"
           disabled={loading}
           className="
-          bg-orange-600
-          text-white
-          px-6
-          py-3
-          rounded
-          disabled:opacity-50
+            bg-orange-600
+            text-white
+            px-8
+            py-4
+            rounded-lg
+            font-semibold
+            disabled:opacity-50
           "
         >
-          {loading ? "Submitting..." : "Submit"}
+          {loading
+            ? "Submitting RFQ..."
+            : "Submit RFQ"}
         </button>
-
       </form>
-
     </main>
   );
 }

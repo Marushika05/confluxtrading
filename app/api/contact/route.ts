@@ -13,13 +13,14 @@ export async function POST(req: Request) {
 
   const body = await req.json();
 
-  const {
-    name,
-    phone,
-    email,
-    message,
-    token,
-  } = body;
+const {
+  name,
+  company,
+  phone,
+  email,
+  message,
+  token,
+} = body;
 
   if (
     !name ||
@@ -73,13 +74,14 @@ export async function POST(req: Request) {
   const { data, error } = await supabase
     .from("leads")
     .insert([
-      {
-        name,
-        phone,
-        email,
-        message,
-      },
-    ]);
+  {
+    name,
+    company,
+    phone,
+    email,
+    message,
+  },
+]);
 
   if (error) {
 
@@ -99,27 +101,28 @@ export async function POST(req: Request) {
 
   try {
 
-    await resend.emails.send({
+    const result = await resend.emails.send({
+  from: "onboarding@resend.dev",
+  to: COMPANY.email,
+  subject: "New Conflux Trading Inquiry",
+  html: `
+  <h2>New RFQ Received</h2>
 
-      from: "onboarding@resend.dev",
+  <p><strong>Name:</strong> ${name}</p>
 
-      to: COMPANY.email,
+  <p><strong>Company:</strong> ${company}</p>
 
-      subject:
-        "New Conflux Trading Inquiry",
+  <p><strong>Phone:</strong> ${phone}</p>
 
-      html: `
-        <h2>New Lead Received</h2>
+  <p><strong>Email:</strong> ${email}</p>
 
-        <p><strong>Name:</strong> ${name}</p>
+  <p><strong>Project Requirements:</strong></p>
 
-        <p><strong>Phone:</strong> ${phone}</p>
+  <p>${message}</p>
+`,
+});
 
-        <p><strong>Email:</strong> ${email}</p>
-
-        <p><strong>Message:</strong> ${message}</p>
-      `,
-    });
+console.log("EMAIL RESULT:", result);
 
   } catch (emailError) {
 
