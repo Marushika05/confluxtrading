@@ -3,6 +3,8 @@ import WhyChooseUs from "@/components/WhyChooseUs";
 import RecentlyViewed from "@/components/RecentlyViewed";
 import MarketsServed from "@/components/MarketsServed";
 import AboutConflux from "@/components/AboutConflux";
+// import Footer from "@/components/Footer";
+
 
 export default function Home() {
   return (
@@ -10,7 +12,7 @@ export default function Home() {
 
       {/* HERO SECTION */}
 
-      <section className="bg-gray-950 text-white py-36">
+      <section className="bg-slate-950 text-white py-36">
 
         <div className="max-w-7xl mx-auto px-8">
 
@@ -19,33 +21,27 @@ export default function Home() {
           </p>
 
           <h1 className="text-6xl md:text-7xl font-bold leading-tight max-w-5xl mb-8">
-
             Direct-to-Foundry Industrial Hardware
+            <br />
             for North American Infrastructure
-
           </h1>
 
-          <p className="text-xl text-gray-300 max-w-3xl mb-10 leading-relaxed">
-
-            Precision-machined NPT fittings,
-            structural components, and custom
-            metal hardware delivered with
-            dependable global logistics and
-            uncompromising manufacturing standards.
-
+          <p className="text-xl text-slate-300 max-w-3xl mb-10 leading-relaxed">
+            Industrial handrail solutions, delivered with dependable global
+            logistics and uncompromising manufacturing standards.
           </p>
 
           <div className="flex flex-wrap gap-4">
 
             <button
               className="
-              bg-orange-600
-              hover:bg-orange-700
-              px-8
-              py-4
-              rounded-lg
-              font-semibold
-              transition
+                bg-orange-600
+                hover:bg-orange-700
+                px-8
+                py-4
+                rounded-lg
+                font-semibold
+                transition
               "
             >
               View Capabilities
@@ -53,15 +49,15 @@ export default function Home() {
 
             <button
               className="
-              border
-              border-white
-              px-8
-              py-4
-              rounded-lg
-              font-semibold
-              hover:bg-white
-              hover:text-black
-              transition
+                border
+                border-white
+                px-8
+                py-4
+                rounded-lg
+                font-semibold
+                hover:bg-white
+                hover:text-slate-950
+                transition
               "
             >
               Request Quote
@@ -73,18 +69,28 @@ export default function Home() {
 
       </section>
 
-      {/* EXISTING SECTIONS */}
+      <div className="h-px bg-slate-800"></div>
 
+      {/* ABOUT */}
 
       <AboutConflux />
+
+      {/* INDUSTRIES SERVED */}
+
       <MarketsServed />
 
+      {/* CAPABILITIES */}
 
       <ProductCategories />
 
+      {/* QUALITY & LOGISTICS */}
+
       <WhyChooseUs />
 
+      {/* CONTINUE WHERE YOU LEFT OFF */}
+
       <RecentlyViewed />
+       
 
     </main>
   );

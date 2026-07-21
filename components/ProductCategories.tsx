@@ -1,53 +1,53 @@
+import Link from "next/link";
 const capabilities = [
   {
-    title: "Malleable Iron NPT Fittings",
+    title: "Structural Handrail Systems",
     description:
-      "Industrial-grade threaded fittings engineered for plumbing, gas distribution, and infrastructure applications requiring strict compliance and long-term durability.",
+      "Premium structural handrail solutions engineered for commercial buildings, industrial facilities, infrastructure projects, and public safety applications.",
   },
 
   {
     title: "Structural Slip-On Fittings",
     description:
-      "Modular railing, barrier, and structural connection systems designed for commercial construction, public infrastructure, and safety installations.",
+      "Modular structural fittings designed for fast installation, long-term durability, and compliance across commercial and industrial environments.",
   },
 
   {
-    title: "Custom Flanges & Anchoring Hardware",
+    title: "Custom Manufacturing Solutions",
     description:
-      "Custom-manufactured components produced to project specifications, including flanges, anchoring systems, castings, and engineered metal hardware.",
+      "Factory-direct manufacturing of custom structural components, castings, flanges, anchoring systems, and engineered metal hardware built to project specifications.",
   },
 
   {
-    title: "OEM & Private Label Manufacturing",
+    title: "Industrial Hardware Components",
     description:
-      "End-to-end manufacturing support including CAD-based development, custom tooling, private branding, and scalable production runs.",
+      "Reliable industrial hardware and OEM manufacturing solutions supporting distributors, contractors, engineers, and equipment manufacturers across North America.",
   },
 ];
 
 export default function ProductCategories() {
   return (
     <section
-  id="capabilities"
-  className="py-24 bg-gray-50"
->
-
+      id="capabilities"
+      className="py-28 bg-white"
+    >
       <div className="max-w-7xl mx-auto px-8">
 
-        <div className="mb-16">
+        <div className="mb-16 max-w-4xl">
 
-          <p className="text-orange-600 font-semibold mb-3">
-            CAPABILITIES
+          <p className="text-orange-600 font-semibold tracking-wider uppercase mb-4">
+            Core Capabilities
           </p>
 
-          <h2 className="text-5xl font-bold mb-6">
+          <h2 className="text-5xl font-bold text-slate-900 mb-6">
             Manufacturing & Supply Capabilities
           </h2>
 
-          <p className="text-gray-600 text-lg max-w-3xl">
-            Conflux Trading delivers industrial hardware,
-            structural components, and custom manufacturing
-            solutions for contractors, engineers, distributors,
-            and OEM partners across North America.
+          <p className="text-lg text-slate-600 leading-8">
+            From standard structural fittings to fully customized
+            manufacturing, Conflux Trading delivers dependable,
+            factory-direct industrial solutions designed to support
+            long-term infrastructure and commercial projects.
           </p>
 
         </div>
@@ -59,20 +59,25 @@ export default function ProductCategories() {
             <div
               key={item.title}
               className="
-              bg-white
-              border
-              rounded-2xl
-              p-8
-              hover:shadow-lg
-              transition
+                bg-white
+                border
+                border-slate-200
+                rounded-2xl
+                p-8
+                hover:shadow-xl
+                hover:-translate-y-1
+                transition-all
+                duration-300
               "
             >
 
-              <h3 className="text-2xl font-bold mb-4">
+              <div className="w-12 h-1 bg-orange-600 rounded-full mb-6"></div>
+
+              <h3 className="text-2xl font-bold text-slate-900 mb-5">
                 {item.title}
               </h3>
 
-              <p className="text-gray-600 leading-relaxed">
+              <p className="text-slate-600 leading-8">
                 {item.description}
               </p>
 
@@ -82,38 +87,56 @@ export default function ProductCategories() {
 
         </div>
 
-        <div className="mt-12 flex flex-wrap gap-4">
+        <div className="mt-14 flex flex-wrap gap-5">
 
-          <button
-            className="
-            bg-orange-600
-            text-white
-            px-8
-            py-4
-            rounded-lg
-            font-semibold
-            "
-          >
-            Request Quote
-          </button>
+         <div className="mt-12 flex flex-wrap gap-5">
 
-          <button
-            className="
-            border
-            border-gray-300
-            px-8
-            py-4
-            rounded-lg
-            font-semibold
-            "
-          >
-            Download Specifications
-          </button>
+  <Link
+    href="/contact"
+    className="
+      inline-flex
+      items-center
+      justify-center
+      bg-orange-600
+      hover:bg-orange-700
+      text-white
+      px-8
+      py-4
+      rounded-lg
+      font-semibold
+      transition
+      shadow-md
+    "
+  >
+    Request Quote
+  </Link>
 
+  <a
+    href="/documents/Conflux-Trading-Specifications.pdf"
+    download
+    className="
+      inline-flex
+      items-center
+      justify-center
+      border
+      border-slate-300
+      bg-white
+      text-slate-800
+      hover:bg-slate-100
+      px-8
+      py-4
+      rounded-lg
+      font-semibold
+      transition
+    "
+  >
+    Download Product Catalog (PDF)
+  </a>
+
+</div>
         </div>
 
       </div>
-
     </section>
   );
 }
