@@ -1,4 +1,3 @@
- 
 "use client";
 
 import { useState } from "react";
@@ -18,7 +17,9 @@ export default function Contact() {
   const [loading, setLoading] = useState(false);
   const [token, setToken] = useState("");
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(
+    e: React.FormEvent<HTMLFormElement>
+  ) {
     e.preventDefault();
 
     if (
@@ -78,146 +79,164 @@ export default function Contact() {
       });
 
       setToken("");
+
     } catch (error) {
+
       console.error(error);
       alert("Something went wrong");
+
     }
 
     setLoading(false);
   }
 
   return (
-    <main className="max-w-4xl mx-auto p-10">
-      <div className="mb-12">
-        <p className="text-orange-600 font-semibold mb-3">
-          REQUEST FOR QUOTE
-        </p>
+    <main className="bg-slate-50 py-16 md:py-20">
 
-        <h1 className="text-5xl font-bold mb-6">
-          Start Your Procurement Discussion
-        </h1>
+      <div className="max-w-4xl mx-auto px-5 sm:px-6 lg:px-8">
 
-        <p className="text-gray-600 text-lg">
-          Submit your project requirements,
-          bill of materials, or sourcing needs.
-          Our team will review your inquiry and
-          respond with the most appropriate solution.
-        </p>
-      </div>
+        <div className="mb-10 md:mb-12">
 
-      <form
-        onSubmit={handleSubmit}
-        className="space-y-5"
-      >
-        <input
-          type="text"
-          placeholder="Full Name"
-          className="w-full border p-4 rounded"
-          value={form.name}
-          required
-          minLength={2}
-          onChange={(e) =>
-            setForm({
-              ...form,
-              name: e.target.value,
-            })
-          }
-        />
+          <p className="text-orange-600 font-semibold tracking-wider uppercase text-sm md:text-base mb-3">
+            Request for Quote
+          </p>
 
-        <input
-          type="text"
-          placeholder="Company"
-          className="w-full border p-4 rounded"
-          value={form.company}
-          onChange={(e) =>
-            setForm({
-              ...form,
-              company: e.target.value,
-            })
-          }
-        />
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-6 leading-tight">
+            Start Your Procurement Discussion
+          </h1>
 
-        <PhoneInput
-          country={"ca"}
-          value={form.phone}
-          onChange={(phone) =>
-            setForm({
-              ...form,
-              phone,
-            })
-          }
-          inputStyle={{
-            width: "100%",
-            height: "56px",
-          }}
-        />
+          <p className="text-base md:text-lg text-slate-600 leading-8">
+            Submit your project requirements,
+            Bill of Materials, or sourcing needs.
+            Our team will review your inquiry and
+            respond with the most appropriate solution.
+          </p>
 
-        <input
-          type="email"
-          placeholder="Business Email"
-          className="w-full border p-4 rounded"
-          value={form.email}
-          required
-          onChange={(e) =>
-            setForm({
-              ...form,
-              email: e.target.value,
-            })
-          }
-        />
-
-        <textarea
-          placeholder="Project Requirements / Bill of Materials"
-          className="w-full border p-4 h-48 rounded"
-          value={form.message}
-          required
-          minLength={10}
-          onChange={(e) =>
-            setForm({
-              ...form,
-              message: e.target.value,
-            })
-          }
-        />
-
-        <div className="flex justify-center">
-          <Turnstile
-            siteKey={
-              process.env
-                .NEXT_PUBLIC_TURNSTILE_SITE_KEY!
-            }
-            options={{
-              theme: "light",
-              size: "normal",
-            }}
-            onSuccess={(token) => {
-              console.log(
-                "Turnstile success:",
-                token
-              );
-              setToken(token);
-            }}
-          />
         </div>
 
-        <button
-          type="submit"
-          disabled={loading}
-          className="
-            bg-orange-600
-            text-white
-            px-8
-            py-4
-            rounded-lg
-            font-semibold
-            disabled:opacity-50
-          "
+        <form
+          onSubmit={handleSubmit}
+          className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-10 space-y-6"
         >
-          {loading
-            ? "Submitting RFQ..."
-            : "Submit RFQ"}
-        </button>
-      </form>
+
+          <input
+            type="text"
+            placeholder="Full Name"
+            required
+            minLength={2}
+            value={form.name}
+            onChange={(e) =>
+              setForm({
+                ...form,
+                name: e.target.value,
+              })
+            }
+            className="w-full border border-slate-300 rounded-lg p-4 focus:outline-none focus:ring-2 focus:ring-orange-500"
+          />
+
+          <input
+            type="text"
+            placeholder="Company"
+            value={form.company}
+            onChange={(e) =>
+              setForm({
+                ...form,
+                company: e.target.value,
+              })
+            }
+            className="w-full border border-slate-300 rounded-lg p-4 focus:outline-none focus:ring-2 focus:ring-orange-500"
+          />
+
+          <PhoneInput
+            country={"ca"}
+            value={form.phone}
+            onChange={(phone) =>
+              setForm({
+                ...form,
+                phone,
+              })
+            }
+            inputStyle={{
+              width: "100%",
+              height: "56px",
+              borderRadius: "8px",
+            }}
+          />
+
+          <input
+            type="email"
+            placeholder="Business Email"
+            required
+            value={form.email}
+            onChange={(e) =>
+              setForm({
+                ...form,
+                email: e.target.value,
+              })
+            }
+            className="w-full border border-slate-300 rounded-lg p-4 focus:outline-none focus:ring-2 focus:ring-orange-500"
+          />
+
+          <textarea
+            placeholder="Project Requirements / Bill of Materials"
+            required
+            minLength={10}
+            value={form.message}
+            onChange={(e) =>
+              setForm({
+                ...form,
+                message: e.target.value,
+              })
+            }
+            className="w-full border border-slate-300 rounded-lg p-4 h-48 focus:outline-none focus:ring-2 focus:ring-orange-500"
+          />
+
+          <div className="flex justify-center overflow-x-auto">
+
+            <Turnstile
+              siteKey={
+                process.env
+                  .NEXT_PUBLIC_TURNSTILE_SITE_KEY!
+              }
+              options={{
+                theme: "light",
+                size: "normal",
+              }}
+              onSuccess={(token) => {
+                console.log(
+                  "Turnstile success:",
+                  token
+                );
+                setToken(token);
+              }}
+            />
+
+          </div>
+
+          <button
+            type="submit"
+            disabled={loading}
+            className="
+              w-full
+              bg-orange-600
+              hover:bg-orange-700
+              text-white
+              py-4
+              rounded-lg
+              font-semibold
+              transition
+              disabled:opacity-50
+            "
+          >
+            {loading
+              ? "Submitting RFQ..."
+              : "Submit RFQ"}
+          </button>
+
+        </form>
+
+      </div>
+
     </main>
   );
 }

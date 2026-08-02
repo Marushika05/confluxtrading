@@ -59,43 +59,51 @@ export default function FAQ() {
   ];
 
   return (
-    <main className="bg-slate-50 min-h-screen py-20">
-      <div className="max-w-5xl mx-auto px-8">
-        <div className="mb-16">
-          <p className="text-orange-600 font-semibold mb-3">
-            FREQUENTLY ASKED QUESTIONS
+    <main className="bg-slate-50 min-h-screen py-16 md:py-20">
+      <div className="max-w-5xl mx-auto px-5 sm:px-6 lg:px-8">
+
+        <div className="mb-12 md:mb-16">
+
+          <p className="text-orange-600 font-semibold tracking-wider uppercase text-sm md:text-base mb-3">
+            Frequently Asked Questions
           </p>
 
-          <h1 className="text-5xl font-bold text-slate-900 mb-6">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-6">
             Frequently Asked Questions
           </h1>
 
-          <p className="text-lg text-slate-600 max-w-3xl">
+          <p className="text-base md:text-lg text-slate-600 max-w-3xl leading-8">
             Find answers to common questions regarding our products,
             manufacturing capabilities, procurement process, logistics,
             and industrial supply services.
           </p>
+
         </div>
 
-        <div className="space-y-5">
+        <div className="space-y-4 md:space-y-5">
+
           {faqs.map((faq, index) => (
+
             <div
               key={index}
               className="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden"
             >
+
               <button
                 onClick={() =>
                   setOpenIndex(openIndex === index ? null : index)
                 }
-                className="w-full flex justify-between items-center text-left p-8 hover:bg-slate-50 transition"
+                className="w-full flex justify-between items-center gap-4 text-left p-5 md:p-8 hover:bg-slate-50 transition"
               >
-                <h2 className="text-xl font-semibold text-slate-900">
+
+                <h2 className="text-lg md:text-xl font-semibold text-slate-900">
                   {faq.question}
                 </h2>
 
-                <span className="text-3xl font-light text-orange-600">
+                <span className="text-2xl md:text-3xl font-light text-orange-600 flex-shrink-0">
                   {openIndex === index ? "−" : "+"}
                 </span>
+
               </button>
 
               <div
@@ -105,22 +113,30 @@ export default function FAQ() {
                     : "max-h-0 opacity-0"
                 }`}
               >
-                <div className="px-8 pb-8">
-                  <p className="text-slate-600 leading-8">
+
+                <div className="px-5 md:px-8 pb-5 md:pb-8">
+
+                  <p className="text-slate-600 leading-7 md:leading-8">
                     {faq.answer}
                   </p>
+
                 </div>
+
               </div>
+
             </div>
+
           ))}
+
         </div>
 
-        <div className="mt-20 bg-slate-900 rounded-3xl p-12 text-center text-white">
-          <h2 className="text-3xl font-bold mb-4">
+        <div className="mt-16 md:mt-20 bg-slate-900 rounded-3xl p-8 md:p-12 text-center text-white">
+
+          <h2 className="text-2xl md:text-3xl font-bold mb-4">
             Still Have Questions?
           </h2>
 
-          <p className="text-slate-300 max-w-2xl mx-auto mb-8">
+          <p className="text-slate-300 text-base md:text-lg max-w-2xl mx-auto leading-8 mb-8">
             Our procurement specialists are available to discuss your
             project requirements, sourcing needs, custom manufacturing,
             and bulk order inquiries.
@@ -128,11 +144,26 @@ export default function FAQ() {
 
           <a
             href="/contact"
-            className="inline-flex items-center justify-center bg-orange-600 hover:bg-orange-700 px-8 py-4 rounded-lg font-semibold transition"
+            className="
+              inline-flex
+              items-center
+              justify-center
+              w-full
+              sm:w-auto
+              bg-orange-600
+              hover:bg-orange-700
+              px-8
+              py-4
+              rounded-lg
+              font-semibold
+              transition
+            "
           >
             Request a Quote
           </a>
+
         </div>
+
       </div>
     </main>
   );

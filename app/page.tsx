@@ -1,10 +1,9 @@
+import Link from "next/link";
+
 import ProductCategories from "@/components/ProductCategories";
 import WhyChooseUs from "@/components/WhyChooseUs";
-import RecentlyViewed from "@/components/RecentlyViewed";
 import MarketsServed from "@/components/MarketsServed";
 import AboutConflux from "@/components/AboutConflux";
-// import Footer from "@/components/Footer";
-
 
 export default function Home() {
   return (
@@ -12,29 +11,35 @@ export default function Home() {
 
       {/* HERO SECTION */}
 
-      <section className="bg-slate-950 text-white py-36">
+      <section className="bg-slate-950 text-white py-20 md:py-28 lg:py-36">
 
-        <div className="max-w-7xl mx-auto px-8">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
 
-          <p className="uppercase tracking-[0.25em] text-orange-500 mb-6">
+          <p className="uppercase tracking-[0.25em] text-orange-500 text-sm md:text-base mb-5">
             Conflux Trading
           </p>
 
-          <h1 className="text-6xl md:text-7xl font-bold leading-tight max-w-5xl mb-8">
+          <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold leading-tight max-w-5xl mb-6 md:mb-8">
             Direct-to-Foundry Industrial Hardware
-            <br />
+            <br className="hidden md:block" />
+            <span className="md:hidden"> </span>
             for North American Infrastructure
           </h1>
 
-          <p className="text-xl text-slate-300 max-w-3xl mb-10 leading-relaxed">
-            Industrial handrail solutions, delivered with dependable global
-            logistics and uncompromising manufacturing standards.
+          <p className="text-base sm:text-lg lg:text-xl text-slate-300 max-w-3xl leading-relaxed mb-8 md:mb-10">
+            Industrial handrail solutions, delivered with dependable
+            global logistics and uncompromising manufacturing
+            standards.
           </p>
 
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-col sm:flex-row gap-4">
 
-            <button
+            <Link
+              href="/#capabilities"
               className="
+                w-full
+                sm:w-auto
+                text-center
                 bg-orange-600
                 hover:bg-orange-700
                 px-8
@@ -45,10 +50,14 @@ export default function Home() {
               "
             >
               View Capabilities
-            </button>
+            </Link>
 
-            <button
+            <Link
+              href="/contact"
               className="
+                w-full
+                sm:w-auto
+                text-center
                 border
                 border-white
                 px-8
@@ -61,7 +70,7 @@ export default function Home() {
               "
             >
               Request Quote
-            </button>
+            </Link>
 
           </div>
 
@@ -69,13 +78,13 @@ export default function Home() {
 
       </section>
 
-      <div className="h-px bg-slate-800"></div>
+      <div className="h-px bg-slate-800" />
 
       {/* ABOUT */}
 
       <AboutConflux />
 
-      {/* INDUSTRIES SERVED */}
+      {/* INDUSTRIES */}
 
       <MarketsServed />
 
@@ -83,14 +92,9 @@ export default function Home() {
 
       <ProductCategories />
 
-      {/* QUALITY & LOGISTICS */}
+      {/* WHY CHOOSE US */}
 
       <WhyChooseUs />
-
-      {/* CONTINUE WHERE YOU LEFT OFF */}
-
-      <RecentlyViewed />
-       
 
     </main>
   );

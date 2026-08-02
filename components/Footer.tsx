@@ -5,9 +5,9 @@ export default function Footer() {
   return (
     <footer id="contact" className="bg-slate-950 text-white">
 
-      <div className="max-w-7xl mx-auto px-8 py-16">
+      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-16">
 
-        <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
 
           {/* Company */}
 
@@ -67,7 +67,7 @@ export default function Footer() {
                 href="/#markets"
                 className="hover:text-orange-500 transition"
               >
-                Industries Served
+                Industries
               </a>
 
               <a
@@ -76,6 +76,13 @@ export default function Footer() {
               >
                 Capabilities
               </a>
+
+              <Link
+                href="/faq"
+                className="hover:text-orange-500 transition"
+              >
+                FAQ
+              </Link>
 
               <Link
                 href="/contact"
@@ -99,6 +106,7 @@ export default function Footer() {
             <div className="space-y-5 text-slate-300 leading-7">
 
               <div>
+
                 <p className="font-semibold text-white">
                   Address
                 </p>
@@ -116,9 +124,12 @@ export default function Footer() {
                   Email
                 </p>
 
-                <p>
+                <a
+                  href="mailto:procurement@confluxtrading.ca"
+                  className="hover:text-orange-500 transition break-all"
+                >
                   procurement@confluxtrading.ca
-                </p>
+                </a>
 
               </div>
 
@@ -128,9 +139,12 @@ export default function Footer() {
                   Phone
                 </p>
 
-                <p>
-                  +1 (905) 555-0182
-                </p>
+                <a
+                  href="tel:+19055550182"
+                  className="hover:text-orange-500 transition"
+                >
+                  +1 (647) 863-1592
+                </a>
 
               </div>
 
@@ -138,44 +152,9 @@ export default function Footer() {
 
           </div>
 
-          {/* Legal */}
-
-          <div>
-
-            <h3 className="text-xl font-semibold mb-6">
-              Legal
-            </h3>
-
-            <div className="flex flex-col gap-4 text-slate-300">
-
-              <Link
-                href="/privacy-policy"
-                className="hover:text-orange-500 transition"
-              >
-                Privacy Policy
-              </Link>
-
-              <Link
-                href="/terms-of-trade"
-                className="hover:text-orange-500 transition"
-              >
-                Terms of Trade
-              </Link>
-
-              <Link
-                href="/commercial-warranties"
-                className="hover:text-orange-500 transition"
-              >
-                Commercial Warranties
-              </Link>
-
-            </div>
-
-          </div>
-
         </div>
 
-        <div className="border-t border-slate-700 mt-14 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="border-t border-slate-700 mt-14 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
 
           <p className="text-slate-400 text-sm">
             © 2026 Conflux Trading. All Rights Reserved.
