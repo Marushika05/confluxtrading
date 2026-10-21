@@ -26,7 +26,7 @@ export default function AboutConflux() {
               specializing in premium structural fittings, custom
               manufacturing solutions, and precision-engineered handrail
               systems. We provide the essential metal hardware required to
-              build and maintain robust industrial environments across the
+              build and maintain robust infrastructure across the
               continent.
             </p>
 

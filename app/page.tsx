@@ -23,11 +23,11 @@ export default function Home() {
             Direct-to-Foundry Industrial Hardware
             <br className="hidden md:block" />
             <span className="md:hidden"> </span>
-            for North American Infrastructure
+            {/* for North American Infrastructure */}
           </h1>
 
           <p className="text-base sm:text-lg lg:text-xl text-slate-300 max-w-3xl leading-relaxed mb-8 md:mb-10">
-            Industrial handrail solutions, delivered with dependable
+            Industrial  solutions, delivered with dependable
             global logistics and uncompromising manufacturing
             standards.
           </p>

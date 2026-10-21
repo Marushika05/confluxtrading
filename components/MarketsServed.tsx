@@ -39,12 +39,12 @@ export default function MarketsServed() {
             "
           >
             <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-4 md:mb-5">
-              Commercial & Industrial Construction
+              Commercial,Residential & Industrial Construction
             </h3>
 
             <p className="text-slate-600 leading-7 md:leading-8">
-              Providing heavy-duty, code-compliant handrails and
-              guardrails for manufacturing plants, warehouses,
+              Providing heavy-duty, code-compliant pipe-fittings
+              for manufacturing plants, warehouses,
               distribution centers, and commercial facilities.
             </p>
           </div>

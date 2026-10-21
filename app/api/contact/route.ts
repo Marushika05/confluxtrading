@@ -99,39 +99,52 @@ const {
 
   // SEND EMAIL
 
-  try {
+ try {
+  const escapeHtml = (value: unknown) =>
+    String(value ?? "").replace(/[&<>"']/g, (char) => {
+      const entities: Record<string, string> = {
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;",
+      };
+      return entities[char];
+    });
 
-    const result = await resend.emails.send({
-  from: "onboarding@resend.dev",
-  to: COMPANY.email,
-  subject: "New Conflux Trading Inquiry",
-  html: `
-  <h2>New RFQ Received</h2>
+  const result = await resend.emails.send({
+    from: "Conflux Trading <notifications@confluxtrading.ca>",
+    to: COMPANY.email,
+    replyTo: email,
+    subject: "New Conflux Trading Inquiry",
+    html: `
+      <h2>New RFQ Received</h2>
 
-  <p><strong>Name:</strong> ${name}</p>
+      <p><strong>Name:</strong> ${escapeHtml(name)}</p>
 
-  <p><strong>Company:</strong> ${company}</p>
+      <p><strong>Company:</strong> ${escapeHtml(company || "Not provided")}</p>
 
-  <p><strong>Phone:</strong> ${phone}</p>
+      <p><strong>Phone:</strong> ${escapeHtml(phone)}</p>
 
-  <p><strong>Email:</strong> ${email}</p>
+      <p><strong>Email:</strong> ${escapeHtml(email)}</p>
 
-  <p><strong>Project Requirements:</strong></p>
+      <p><strong>Project Requirements:</strong></p>
 
-  <p>${message}</p>
-`,
-});
-
-console.log("EMAIL RESULT:", result);
-
-  } catch (emailError) {
-
-    console.log(emailError);
-
-  }
-
-  return NextResponse.json({
-    success: true,
-    data,
+      <p style="white-space: pre-wrap;">${escapeHtml(message)}</p>
+    `,
   });
+
+  if (result.error) {
+    console.error("RESEND ERROR:", result.error);
+  } else {
+    console.log("EMAIL SENT:", result.data?.id);
+  }
+} catch (emailError) {
+  console.error("EMAIL SENDING FAILED:", emailError);
+}
+
+return NextResponse.json({
+  success: true,
+  data,
+});
 }
